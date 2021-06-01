@@ -27,3 +27,27 @@ or other shell you want.
 4. Build again without the `-H=windowsgui` option.
 
 Then it should be run without problem.
+
+### Guide
+
+#### Server commands
+`l`: List currently accepted connections (first field is connection IDs).
+
+`<Number>`: Spawn cmd.exe on client of specified connection ID.
+
+`h`: This help message.
+
+`q`: Quit server (clients won't quit).
+
+`Ctrl-C` (When communicating with client): Close current client's connection.
+        
+#### Client behavior
+
+Once client program starts, it will keep trying to connect server. Once it got accepted by the server, it waits server inform 
+to start cmd.exe. After cmd.exe exit or server disconnect (like server press Ctrl-C), it will close the connection and cmd.exe,
+then try to connect server again (server will get a new connection ID). So, **the client runs forever if nothing bad happended
+even after quitting server.**
+
+(**Note: This client spawns a cmd.exe process, so even using techniques like
+DLL injection to hide the client program itself, cmd.exe will still appear in
+task manager.**)
